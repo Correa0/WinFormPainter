@@ -30,7 +30,7 @@ namespace projectPaint
             panelDraw.MouseMove += panelDraw_MouseMove;
             panelDraw.MouseUp += panelDraw_MouseUp;
 
-            (panelDraw as Control).KeyPress += panelDraw_KeyDown;
+            (panelDraw as Control).KeyDown += panelDraw_KeyDown;
         }
 
         bool drawing = false; // Drawing Var
@@ -41,12 +41,15 @@ namespace projectPaint
         int sizeDiff = 50; //Var pixels to difference square to line  
 
         //
-        Point[] vertexs = new Point[0];
-        Point lastPoint;
+        Point[] vertexs = new Point[0]; // Vertexs of active paint
+        Point lastPoint; // last point active paint
 
-        private void panelDraw_KeyDown(object sender, KeyPressEventArgs e) // Add vertex on Key Down
+        private void panelDraw_KeyDown(object sender, KeyEventArgs e) // Add vertex on Key Down
         {
-            addVertex(lastPoint);
+            if (e.KeyCode == Keys.Space) // Using 'SPACE' key to Define create new vertex
+            {
+                addVertex(lastPoint); // Add new Vertex
+            }   
         }
 
         private void addVertex(Point p) // Add point to list vertexs
@@ -78,42 +81,40 @@ namespace projectPaint
                 YDiff = YDiff * -1;
             }
 
-            bool isLine = true; // isLine Var
-            bool isCircle = false;
-            bool isTriangle = false;
-            bool isSquare = false;
-            bool isPolygon = false;
-
-            MessageBox.Show(vertexs.Length.ToString());
+            bool isLine = true; // isLine Var - Define by distance start point-end point
+            bool isCircle = false; //isCircle Var - Define by number of vertex = 2 (start and end)
+            bool isTriangle = false;//isTriangle Var - Define by number of vertex = 4 (start and end + 2 vertexs)
+            bool isSquare = false; //isSquare Var - Define by number of vertex = 5 (start and end + 3 vertexs)
+            bool isPolygon = false; ////isCircle Var - Define by number of vertex > 5 (start and end + vertexs)
 
             // Verify start point and end point 
             if (XDiff < sizeDiff)
             {
                 if (YDiff < sizeDiff)
                 {
-                    isLine = false; // defines whether it is a square or not based on the start and end point
+                    isLine = false; // defines whether it is a line or not based on the start and end point
                 }
             }
 
             if (isLine == false)
             {
-                if (vertexs.Length == 2)
+                if (vertexs.Length == 2) // Define Circle
                 {
-                    isCircle = true;
+                    isCircle = true; // Define Circle
                 }
-                if (vertexs.Length == 4)
+                if (vertexs.Length == 4) // Define Triangle
                 {
-                    isTriangle = true;
+                    isTriangle = true; // Define Triangle
                 }
-                if (vertexs.Length == 5)
+                if (vertexs.Length == 5) // Define Square
                 {
-                    isSquare = true;
+                    isSquare = true; // Define Square
                 }
-                if (vertexs.Length > 5)
-                {
-                    isPolygon = true;
+                if (vertexs.Length > 5) // Define Polygon
+                { 
+                    isPolygon = true; // Define Polygon
                 }
-                vertexs[vertexs.Length - 1] = vertexs[0];
+                vertexs[vertexs.Length - 1] = vertexs[0]; // if is not line set te last vertex = first vertex;
             }
 
             
@@ -130,12 +131,12 @@ namespace projectPaint
                 {
                     if (isCircle)
                     {
-                        //Draw Square in Panel B
+                        //Draw Circle in Panel B
                         graphicsPanelB.DrawEllipse(penA, new Rectangle(upPoint, new Size(downPoint.X - upPoint.X, downPoint.Y - upPoint.Y))); //Graphics panel B
                     }
                     if (isTriangle)
                     {
-                        //Draw Square in Panel B
+                        //Draw Triangle in Panel B
                         graphicsPanelB.DrawPolygon(penA, vertexs); //Graphics panel B
                     }
                     if (isSquare)
@@ -145,7 +146,7 @@ namespace projectPaint
                     }
                     if (isPolygon)
                     {
-                        //Draw Square in Panel B
+                        //Draw Polygon in Panel B
                         graphicsPanelB.DrawPolygon(penA, vertexs); //Graphics panel B
                     }
                     
@@ -155,7 +156,7 @@ namespace projectPaint
                 drawing = false;
             }
 
-            vertexs = new Point[0];
+            vertexs = new Point[0]; //Clear Vertexs
 
         }
 
@@ -165,7 +166,7 @@ namespace projectPaint
 
         private void panelDraw_MouseDown(object sender, MouseEventArgs e)
         {
-            panelDraw.Focus();
+            panelDraw.Focus(); //Define focus to panelDraw
             if (e.Button == MouseButtons.Left)
             {
                 drawing = true; //On drawing var to MouseLeave event
@@ -189,7 +190,7 @@ namespace projectPaint
             if (e.Button == MouseButtons.Left)
             {
                 x = e.Location;
-                lastPoint = x;
+                lastPoint = x; // Actualize the last point
                 graphics.DrawLine(penA, x, y);
                 y = e.Location;
 
