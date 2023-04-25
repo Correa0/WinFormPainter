@@ -1,0 +1,10 @@
+C:\Users\Desktop\source\repos\projectPaint\projectPaint\obj\Debug\projectPaint.csprojAssemblyReference.cache
+C:\Users\Desktop\source\repos\projectPaint\projectPaint\obj\Debug\projectPaint.frmPaint.resources
+C:\Users\Desktop\source\repos\projectPaint\projectPaint\obj\Debug\projectPaint.Properties.Resources.resources
+C:\Users\Desktop\source\repos\projectPaint\projectPaint\obj\Debug\projectPaint.csproj.GenerateResource.cache
+C:\Users\Desktop\source\repos\projectPaint\projectPaint\obj\Debug\projectPaint.csproj.CoreCompileInputs.cache
+C:\Users\Desktop\source\repos\projectPaint\projectPaint\bin\Debug\projectPaint.exe
+C:\Users\Desktop\source\repos\projectPaint\projectPaint\bin\Debug\projectPaint.pdb
+C:\Users\Desktop\source\repos\projectPaint\projectPaint\obj\Debug\projectPaint.exe
+C:\Users\Desktop\source\repos\projectPaint\projectPaint\obj\Debug\projectPaint.pdb
+C:\Users\Desktop\source\repos\projectPaint\projectPaint\obj\Debug\projectPaint.frmResult.resources
